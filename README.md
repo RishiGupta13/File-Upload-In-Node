@@ -1,2 +1,2 @@
 # File-Upload-In-Node
-Do cd upload_files then cd_server and npm i
+Do cd upload_files then cd server and npm i
