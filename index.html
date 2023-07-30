@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .form{
+            align-items: center;
+
+        }
+
+        input{
+            display: block;
+            margin: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <form class="form">
+        <input type="text" name="file-name" id="name">
+        <input type="file" name="file" id="files" multiple>
+        <button type="submit">Submit</button>
+    </form>
+    
+</body>
+</html>
+
+<script>
+    const form=document.querySelector('form');
+
+    form.addEventListener('submit',(e)=>{
+        const name=document.getElementById("name");
+        const files=document.getElementById("files");
+        const formData=new FormData();
+
+        formData.append("name",name.value);
+
+        for(let i=0;i<files.files.length;i++){
+            formData.append("files",files.files[i]);
+        }
+
+        fetch('http://127.0.0.1:5000/api',{
+            method:'POST',
+            body:formData,
+        })
+        .then(res=>res.json())
+        .then(data=>console.log(data));
+    })
+</script>
